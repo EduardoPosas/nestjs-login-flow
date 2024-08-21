@@ -20,6 +20,7 @@ export class AuthService {
     if (!user) {
       return { error: true, message: "Usuario no existe" };
     }
+    console.log(user);
     // if exist
     // check password
     const passwordMatch = await this.utilsService.passwordMatch(
@@ -31,7 +32,7 @@ export class AuthService {
       return { error: true, message: "Contraseña no válida" };
     }
     // correct password
-    // TODO: generate jwt token
+    // generate jwt token
     const payload = {
       sub: user.email,
       userName: user.firstName,
@@ -64,6 +65,8 @@ export class AuthService {
       ...signupDto,
       password: hashedPassword,
     });
+
+    console.log("Usuario Creado exitósamente", hashedPassword);
 
     return { error: false, message: "Usuario creado" };
   }
